@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>table generator with all of loops</title>
+    <style>
+      .heading {
+        font-weight: 400;
+        text-align: center;
+        font-size: 30px;
+        color: blueviolet;
+      }
+      body {
+        display: flex;
+        background-color: antiquewhite;
+      }
+
+      .main {
+        min-height: 300px;
+        box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+        background-color: rgb(144, 149, 153);
+        border-radius: 15px;
+        width: 25%;
+        margin: 100px 0 0 0;
+        padding: 10px;
+        /* display: flex; */
+        /* position: fixed; */
+      }
+      .title {
+        font-family: "Times New Roman", Times, serif;
+        font-weight: 500;
+        font-size: 50px;
+        color: rgb(112, 112, 167);
+      }
+      .option {
+        text-align: center;
+        font-size: 20px;
+        margin-top: 20px;
+        border: 1px;
+      }
+      .option > input {
+        text-align: center;
+        font-size: 20px;
+        color: rgb(54, 55, 56);
+        margin-top: 20px;
+        margin-left: 50px;
+        border-radius: 15px;
+      }
+      .option > button {
+        font-size: 20px;
+        color: rgb(151, 90, 192);
+        border-radius: 15px;
+        color: rgb(60, 108, 126);
+        border: none;
+        background-color: #e1dae7;
+        padding: 10px;
+      }
+      .option > button:hover {
+        box-shadow: rgba(6, 24, 44, 0.4) 0px 0px 0px 2px,
+          rgba(6, 24, 44, 0.65) 0px 4px 6px -1px,
+          rgba(255, 255, 255, 0.08) 0px 1px 0px inset;
+      }
+      .main > h1 {
+        text-align: center;
+        color: rgb(69, 97, 156);
+        width: auto;
+      }
+      .table > table {
+        padding: 10px;
+        font-size: 20px; 
+        margin: 100px 0px 0px 30px; 
+        color: #909599;
+        box-shadow: 7px 5px 5px black;
+      }
+      .table {
+          
+        text-align: center;  
+        
+      }
+    </style>
+  </head>
+  <body>
+    <div class="main">
+      <h1>Table Generator</h1>
+      <form action="" onsubmit="return generateTable();">
+        <div class="option">
+          <label for="row">Enter Number of Row</label>
+          <input type="number" name="row" id="row" required autofocus/>
+        </div>
+        <div class="option">
+          <label for="column">Emter Number of Column</label>
+          <input type="number" name="column" id="column" required />
+        </div>
+        <div class="option">
+          <label for="msg">Enter Your Message</label>
+          <input type="text" name="msg" id="msg" required />
+        </div>
+        <div class="option">
+          <h3>Select any loop</h3>
+          <label for="for">
+            <input type="radio" name="loop" id="for" value="for" required />For
+            loop
+          </label>
+          <label for="while">
+            <input
+              type="radio"
+              name="loop"
+              id="while"
+              value="while"
+              required
+            />While
+          </label>
+          <label for="doWhile">
+            <input
+              type="radio"
+              name="loop"
+              id="doWhile"
+              value="doWhile"
+              required
+            />Do While
+          </label>
+        </div>
+
+        <div class="option">
+          <button type="submit" value="Generate" id="generate">
+            Generate Table
+          </button>
+          <button type="reset" name="clear" id="clear">Clear</button>
+        </div>
+      </form>
+    </div>
+
+    <div class="table">
+      <table border="1" cellpadding="15" id="output">
+        
+      </table>
+    </div>
+
+    <script>
+      var generateTable = function() {
+          // alert("Hello, Ballu");
+
+          var row = document.getElementById('row').value;
+          var column = document.getElementById('column').value;
+          var message = document.getElementById('msg').value;
+          var loop = document.querySelector("input[name=loop]:checked").value;
+
+
+
+          console.log(row,column,`${message}`,loop);
+
+
+          //find radio button and insert condithins and apply loops
+
+          var temp = ``;
+
+          
+          if(loop === "for")
+          {
+            for (let i=1; i<=row; i++)
+            {
+               temp += `<tr>`;
+                for (var j=1; j<=column; j++)
+                {
+                  temp += `<td>${message}</td>`;
+                  
+                }
+                temp += `</tr>`;
+            }
+          }
+          else if(loop === "while")
+          {
+
+            let i = 1;
+            while (i<=row)
+            {            
+            temp += `<tr>`
+              let j = 1;
+              while (j<=column)
+              {
+                temp += `<td>${message}</td>`
+                j = j + 1;
+              }
+              temp += `</tr>`
+
+            i = i +1;
+            }
+
+          }
+          else if(loop === "doWhile")
+          {
+            let i = 1;
+            do{
+            // console.log("Thankyou for selecting Do While loop");
+            // let DOWHILE = 3;
+            // console.log(DOWHILE);
+            temp += `<tr>`
+              let j = 1;
+              do{
+                temp += `<td>${message}</td>`
+                j = j + 1;
+
+              }while (j <= column);
+              temp += `</tr>`
+
+            i = i + 1;
+
+            } while (i <= row);
+
+          }
+          else
+          {
+            alert("Please select any One loop atleast");
+          }
+          document.getElementById('output').innerHTML = temp;
+          document.getElementById('row').value = '';
+          document.getElementById('column').value = '';
+          document.getElementById('msg').value = '';
+          return false;
+        }
+        
+
+
+    </script>
+  </body>
+</html>
+
