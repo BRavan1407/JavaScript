@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>BMI Calculator</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+</head>
+
+<body>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-8  ">
+                <div class="card shadow mt-5">
+                    <div class="card-header bg-success fw-bold h2 text-center">
+                        BMI Calculator
+                    </div>
+                    <div class="card-body">
+                        <form action="" method="post" onsubmit="return getBmi();">
+                            <div class="form-group">
+                                <label for="name" class="form-label">Enter Your Name</label>
+                                <input type="text" name="text" id="name" placeholder="Enter Your Name"
+                                    class="form-control">
+                            </div>
+                            <div class="form-group mt-3">
+                                <label for="weight" class="form-label">Enter Your Weight</label>
+                                <input type="number" name="weight" id="weight" placeholder="Enter Your Weight in kg"
+                                    class="form-control" required />
+                            </div>
+                            <div class="form-group mt-3">
+                                <label for="height" class="form-label">Enter Your height of foot</label>
+                                <input type="number" name="height" id="height" placeholder="Enter Your Height of Foot"
+                                    class="form-control" step="0.01" required />
+                            </div>
+                            <div class="form-group mt-3">
+                                <label for="inch" class="form-label">Enter Your height of inch</label>
+                                <input type="number" name="height" id="inch" placeholder="Enter Your Height of Inch"
+                                    class="form-control" step="0.01" required />
+                            </div>
+                            <div class="form-group mt-3">
+                                <label for="gender" class="form-label">Select Your Gender</label>                                
+                            </div>
+                            <div>
+                                <input type="radio" value="male" name="gender" id="male" class="form-check-label">
+                                <label for="male" class="form-check-label">Male</label>
+                            </div>
+                            <div>
+                                <input type="radio" value="female" name="gender" id="female" class="form-check-label">
+                                <label for="female" class="form-check-label">Female</label>
+                            </div>
+                            <div id="bmi">
+                                
+                            </div>
+                            <div class="d-flex justify-content-center">
+                                <input type="submit" name="submit" id="submit"
+                                value="Calculate BMI" class="btn btn-success m-3">
+                                <input type="reset" name="clear" id="reset" value="Clear Form" class="btn btn-danger m-3">
+                            </div>
+                            
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script>
+
+        function getBmi() {
+            // alert("Function Called");
+          
+            let w = parseFloat(document.getElementById('weight').value);
+            let h = parseFloat(document.getElementById('height').value);
+            let i = parseFloat(document.getElementById('inch').value);
+
+            let h_m = h / 3.281;
+            let i_m = i / 39.37;
+
+            let height_final = h_m + i_m ;
+
+            let BMI =(w/(height_final * height_final)).toFixed(2);
+
+            let print_bmi = '';
+
+            if(BMI <= 18.5)
+            {
+                print_bmi = `<div class="fs-3 text-center text-bg-info mt-3">Your BMI is ${BMI} And you are Underweight</div>`;
+            }
+            else if (BMI > 18.5 && BMI <= 24.9)
+            {
+                print_bmi = `<div class="fs-3 text-center text-bg-success mt-3">Your BMI is ${BMI} And you are at Normal weight</div>`;
+            }
+            else if (BMI >25 && BMI <= 29.9)
+            {
+                print_bmi = `<div class="fs-3 text-center text-bg-warning mt-3">Your BMI is ${BMI} And you are at Over weight</div>`;
+            }
+            else if (BMI > 30 && BMI <= 34.9)
+            {
+                print_bmi = `<div class="fs-3 text-center text-bg-secondary mt-3">Your BMI is ${BMI} And you are Obese</div>`;
+            }
+            else if (BMI >= 35)
+            {
+                print_bmi = `<div class="fs-3 text-center text-bg-danger mt-3">Your BMI is ${BMI} And you are Extremly Obese</div>`;
+            }
+            else
+            {
+                print_bmi = `Enter Valid Data`;
+            }
+
+            document.getElementById("bmi").innerHTML = print_bmi ;
+
+
+            document.getElementById("name").value = '';
+            document.getElementById("weight").value = '';
+            document.getElementById("height").value = '';
+            document.getElementById("inch").value = '';
+
+            
+
+
+            // console.log(w,height_final);
+            // console.log(BMI);
+            return false;
+        }
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
